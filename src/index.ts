@@ -1,13 +1,13 @@
 import * as striptags from 'striptags';
 
 export class HTMLtoSSML {
-    public config: { [id: string]: Array<string> } = {
+    public config: { [id: string]: string[] } = {
         allowedTags: ['h1', 'h2', 'h3', 'br', 'p']
     }
 
     public convert (html: string): string {
-        let stripped = this.deleteHTML(html);
-        let converted = this.convertHTMLTagsToSSMLTags(stripped);
+        const stripped = this.deleteHTML(html);
+        const converted = this.convertHTMLTagsToSSMLTags(stripped);
         return this.wrapInSpeakTag(converted);
     }
 
