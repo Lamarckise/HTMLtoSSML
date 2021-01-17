@@ -5,11 +5,11 @@ export class HTMLtoSSML {
         allowedTags: ['h1', 'h2', 'h3', 'br']
     }
 
-    deleteHTML (html: string): string {
-        return striptags(html, this.config.allowedTags)
+    public deleteHTML (html: string): string {
+        return striptags(html, this.config.allowedTags);
     }
 
-    convertHTMLTagsToSSMLTags (html: string): string {
+    public convertHTMLTagsToSSMLTags (html: string): string {
         // Replace headings with emphasis
         html = html.replace(/<h1>/g, '<emphasis>');
         html = html.replace(/<h2>/g, '<emphasis>');
@@ -21,6 +21,6 @@ export class HTMLtoSSML {
         // Replace lines with breaks
         html = html.replace(/<br>/g, '<break>');
         
-        return html
+        return html;
     }
 }
