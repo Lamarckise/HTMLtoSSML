@@ -76,3 +76,15 @@ describe('complete test', () => {
     expect(converter.convert(html)).toBe(ssml);
   });
 });
+
+describe('split test', () => {
+  test('simple', () => {
+    const converter = new HTMLtoSSML();
+    const html = "<html><body><div class='container'><p>Test article</p></div><div><span>Test2</span></div></body></html>";
+    const ssml = [
+      "<speak><p>Test article</p></speak>",
+      "<speak>Test2</speak>"
+    ];
+    expect(converter.convertInParts(html, 19)).toStrictEqual(ssml);
+  })
+})

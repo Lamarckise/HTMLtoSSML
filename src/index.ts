@@ -11,6 +11,12 @@ export class HTMLtoSSML {
     return this.wrapInSpeakTag(converted);
   }
 
+  public convertInParts(html: string, length: number): string[] {
+    const stripped = this.deleteHTML(html);
+    const converted = this.convertHTMLTagsToSSMLTags(stripped);
+    return this.splitInParts(converted, length);
+  }
+
   public deleteHTML(html: string): string {
     return striptags(html, this.config.allowedTags);
   }
@@ -33,4 +39,21 @@ export class HTMLtoSSML {
   public wrapInSpeakTag(html: string): string {
     return '<speak>' + html + '</speak>';
   }
+
+  public splitInParts(html: string, length: number): string[] {
+    let parts = this.getStringParts(html, length);
+    if (parts !== null) {
+      parts = parts.map((p) => {
+        return this.wrapInSpeakTag(p);
+      });
+      return parts;  
+    }
+    return [];
+  }
+
+  private getStringParts = (str: string, len: number) => {
+    const regex = new RegExp(".{1," + len + "}(\s|$|<\/p>|<\/break>|<\/emphasis>)", "g");
+    let res = str.match(regex)
+    return res;
+}
 }
