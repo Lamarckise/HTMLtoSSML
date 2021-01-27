@@ -53,7 +53,6 @@ export class HTMLtoSSML {
 
   private getStringParts = (str: string, len: number) => {
     const regex = new RegExp(".{1," + len + "}(\s|$|<\/p>|<\/break>|<\/emphasis>)", "g");
-    let res = str.match(regex)
-    return res;
+    return str.match(regex);
 }
 }
